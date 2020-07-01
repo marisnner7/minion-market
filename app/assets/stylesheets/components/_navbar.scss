@@ -1,0 +1,36 @@
+.navbar-lewagon {
+  justify-content: space-between;
+  background: transparent;
+  // background:rgba(150,150,150,0.4);
+    transition: 0.5s background-color ease;
+
+
+}
+
+.navbar-lewagon .navbar-collapse {
+  flex-grow: 0;
+}
+
+.navbar-lewagon .navbar-brand img {
+  width: 80px;
+}
+
+
+.navbar-lewagon-white {
+  // display:inline-block;
+  background:rgba(0,0,0,0.4);
+}
+
+
+.fixing-margin{
+  margin-top:80px;
+}
+
+.text-primary {
+  text-shadow: 2px 2px 3px rgba(0,0,0,0.4);
+}
+
+.navbar-brand {
+  color: white;
+  text-shadow: 2px 2px 4px #000000;
+}
