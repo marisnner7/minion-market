@@ -1,0 +1,126 @@
+<div class="user-container col-12" style="background-color: white">
+  <% if current_user == @user %>
+    <div class="user-details col-12 d-flex align-items-center">
+      <div class="user-info col-3">
+        <%= link_to edit_user_registration_path, class: "nav-link" do %>
+          <i class="fas fa-user-edit"></i>
+        <% end %>
+        <% if @user.seller %>
+          <h3>My Seller Profile</h3>
+        <% end %>
+        <div class="card-product">
+          <div class="profile-avatar" >
+            <%= cl_image_tag current_user.photo.key, crop: :fill, class: "profile-pic", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false if current_user.photo.attached?%>
+            <%= image_tag "avatar-default-copy.png", crop: :fill, class: "profile-pic", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false unless current_user.photo.attached?%>
+            <div><h3><%= @user.name.capitalize %></h3></div>
+          </div>
+
+          <div class="card-product-infos">
+            <h2>Profile</h2>
+            <p>Username: <%= @user.username %></p>
+            <p> Email: <%= @user.email %></p>
+            <p> Address: <%= @user.address %></p>
+            <p> Cellphone: <%= @user.cellphone %></p>
+          </div>
+        </div>
+      </div>
+      <div class="user-map col-6">
+        <div id="map"
+          style="width: 100%; height: 100%;"
+          data-markers="<%= @markers.to_json %>"
+          data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+        </div>
+      </div>
+    </div>
+    <% end %>
+    <% if current_user.seller %>
+        <div class="user-properties col-12 d-flex">
+          <div class="seller-recent-orders col-5">
+            <div class="card">
+              <div class="card-header">
+                My Previous Purchases
+              </div>
+              <div class="card-body">
+
+              <% if current_user.orders != 0%>
+              <% @purchased_orders.each do |purchased|%>
+                <% counter = 1%>
+                  <div class="d-flex"><%= "Order #{counter} Purchased: #{purchased.updated_at}" %> <%= link_to "review purchase", order_path(purchased), class: "btn btn-light" %></div>
+              <% counter += 1%>
+              <% end %>
+              <% else %>
+                <div> <h3>No previous orders</h3></div>
+              <% end %>
+              </div>
+            </div>
+          </div>
+        <div class="user-products col-7">
+          <div class="card mb-4">
+          <h5 class="card-header d-flex" style="justify-content: space-between;"> <div>My Products </div> <div> <%= link_to "+ create", new_product_path, class: "btn btn-light" %></div></h5>
+            <div class="card-body">
+            <% current_user.products.each do |product|%>
+              <div class="products-cards col-12 d-flex mb-3">
+                <div class="product-card-photo col-4">
+                  <%= cl_image_tag product.photo.key, class: "product-image-user-show", crop: :fill if product.photo.attached? %>
+                </div>
+              <div class="product-card-information-edit col-8">
+                <p><%= product.name %></p>
+                <div class="d-flex">
+                  <%= link_to "Go to Product", product_path(product), class: "btn btn-light mr-2"%>
+
+                  <%= link_to "Edit Product", edit_product_path(product), class: "btn btn-light"%>
+                </div>
+              </div>
+              </div>
+            <% end %>
+            </div>
+          </div>
+        </div>
+        </div>
+    <% end %>
+
+
+    <% if current_user != @user %>
+      <div class="user-details col-12 d-flex align-items-center">
+        <div class="profile-avatar col-3" style=" text-align: center;">
+          <%= cl_image_tag @user.photo.key, crop: :fill, class: "profile-pic", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false if current_user.photo.attached?%>
+          <%= image_tag "avatar-default-copy.png", crop: :fill, class: "profile-pic", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false unless current_user.photo.attached?%>
+          <div><h3><%= @user.name.capitalize %></h3></div>
+        </div>
+        <div class="user-info col-3">
+          <% if @user.seller %>
+            <h3>Seller's Profile</h3>
+          <% end %>
+          <p> Address: <%= @user.address %></p>
+          <p> Cellphone: <%= @user.cellphone %></p>
+        </div>
+        <div class="user-map col-6">
+        <div id="map"
+          style="width: 100%; height: 100%;"
+          data-markers="<%= @markers.to_json %>"
+          data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+        </div>
+        </div>
+      </div>
+      <div class="user-properties col-12 d-flex">
+      <div class="user-products col-8">
+        <div class="card mb-4">
+          <h5 class="card-header d-flex" style="justify-content: space-between;"> <div>Other Products by this Seller </div></h5>
+          <div class="card-body">
+          <% @user.products.each do |product|%>
+              <div class="products-cards col-12 d-flex mb-3">
+                  <div class="product-card-photo col-3">
+                    <%= cl_image_tag product.photo.key, class: "product-image-user-show" if product.photo.attached? %>
+                  </div>
+                <div class="product-card-information-edit col-9">
+                  <h3><%= product.name %></h3>
+                  <%= link_to "Go to Product", product_path(product), class: "btn btn-light"%>
+                </div>
+              </div>
+          <% end %>
+          </div>
+        </div>
+        </div>
+      </div>
+  <% end %>
+</div>
