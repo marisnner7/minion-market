@@ -33,6 +33,10 @@ gem 'devise'
 
 gem 'cloudinary', '~> 1.12.0'
 gem 'pundit'
+gem 'pg_search'
+
+gem 'geocoder'
+
 
 
 # Reduces boot times through caching; required in config/boot.rb
