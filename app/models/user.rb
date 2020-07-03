@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   has_one_attached :photo
 
+  geocoded_by :address
+
   has_many :orders, dependent: :destroy
   has_many :products, dependent: :destroy
 end
