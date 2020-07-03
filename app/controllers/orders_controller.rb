@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
   def update
     @user = current_user
     @order = Order.find(params[:id])
-    authorize @ordr
+    authorize @order
     redirect_to user_path(current_user) if @order.update(order_params)
   end
 
