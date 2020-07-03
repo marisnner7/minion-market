@@ -13,21 +13,22 @@ class OrdersToProductsController < ApplicationController
     # redirect_to @orders_to_product.product
 
     redirect_to @orders_to_product.product, notice: "Succesfully added to cart"
+  end
 
-    def update
-    end
+  def update
+  end
 
-    def destroy
-      @product_in_order = OrdersToProduct.find(params[:id])
-      @product_in_order.destroy
-      redirect_to order_path(@product_in_order.order_id)
-      authorize @product_in_order
-    end
+  def destroy
+    @product_in_order = OrdersToProduct.find(params[:id])
+    @product_in_order.destroy
+    redirect_to order_path(@product_in_order.order_id)
+    authorize @product_in_order
+  end
 
-    private
+  private
 
-    def orders_to_product_params
-      params.require(:orders_to_product).permit(:quantity, :product_id)
-    end
-    end
+  def orders_to_product_params
+    params.require(:orders_to_product).permit(:quantity, :product_id)
+  end
+
 end
