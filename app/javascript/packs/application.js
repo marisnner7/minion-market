@@ -23,4 +23,7 @@ document.addEventListener('turbolinks:load', () => {
   // Call your JS functions here
   initUpdateNavbarOnScroll();
   loadDynamicBannerText();
+  initMapbox();
+
+
 });
