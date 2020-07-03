@@ -1,0 +1,11 @@
+<div class="form-centralize-review">
+  <div class="form-borders">
+    <h2>Add a Review</h2>
+    <%= simple_form_for [ @product, @review ] do |f| %>
+      <%= f.input :description %>
+      <%= f.input :rating, collection: (1..5) %>
+      <%= f.submit "Submit review", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+

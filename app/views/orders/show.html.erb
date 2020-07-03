@@ -1,0 +1,43 @@
+<div class="form-centralize-review">
+  <div class="heading-rounded-sm">
+    <h2> My Cart</h2>
+  </div>
+  <div class="form-borders-cart">
+
+    <% if @myproducts %>
+
+      <table class="table">
+        <thead >
+          <tr class="table-title">
+            <th scope="col col-pro layout-inline" >Product</th>
+            <th scope="qty qty-plus">Quantity</th>
+            <th scope="col col-price col-numeric">Unit Price</th>
+            <th scope="col col-vat col-numeric">Partial</th>
+          </tr>
+
+        </thead>
+          <tbody>
+            <% sum = 0  %>
+            <% @myproducts.each do |product| %>
+              <tr>
+                <th scope='row'><%= Product.find(product.product_id).name %></th>
+                <td>$ <%=  product.quantity  %></td>
+                <td>$ <%=  product.unit_price %></td>
+                <td> <% sum += (product.quantity) * (product.unit_price) %> $ <%=  (product.quantity) * (product.unit_price) %> <%= link_to orders_to_product_path(product),
+                method: 'DELETE' , remote:true do %>
+                  <i class="fas fa-trash-alt"></i>
+                <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+      </table>
+      <hr>
+      <p><strong>To pay : $ <%= sum %></strong></p>
+
+    <%= link_to 'Pay', order_path(@order, order: { status: 'bought' }), method: 'PATCH', class: 'btn btn-primary' %>
+    <%=  redirect_to user_path(current_user) unless @order.status = 'open' %>
+  <% end %>
+  </div>
+</div>
+

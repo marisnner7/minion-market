@@ -6,6 +6,20 @@
   </p>
 </div>
 
+<%= simple_form_for :search, url: root_path, method: :get do |f| %>
+  <div class="search-form-control form-group" id='search-bar'>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "One is not enough"
+  %>
+  <button name="button" type="submit" class="btn btn-flat">
+    <i class="fas fa-search"></i> Search
+  </button>
+
+  </div>
+<% end %>
+
 <div class="fixing-the-card">
   <div class="cards">
     <% if @products %>
