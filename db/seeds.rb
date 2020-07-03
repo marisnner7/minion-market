@@ -34,7 +34,9 @@ minion_notebook = Product.create!({ name: "Minion Notebook", description: "Super
  file = open("https://m.media-amazon.com/images/I/517S8fBBZyL._AC_UL320_ML3_.jpg")
   minion_notebook.photo.attach(io: file, filename: "minion-notebook.jpg")
 
+puts "Creating Reviews"
 
+review2 = Review.create!({rating: 5, description: "Great", user_id: isa.id, product_id: minion_notebook.id})
 
 
 
